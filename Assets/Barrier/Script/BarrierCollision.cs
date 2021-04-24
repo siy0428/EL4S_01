@@ -19,39 +19,17 @@ public class BarrierCollision : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Q))
         {
             DestoryBarrier();
-            player.SetRed();
+            player.SetBarrierRed(false);
         }
         if (Input.GetKeyUp(KeyCode.W))
         {
             DestoryBarrier();
-            player.SetBlue();
-        }
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            DestoryBarrier();
-            player.SetBlack();
+            player.SetBarrierBlue(false);
         }
 
-        //エネルギーが0になった時     
-        int red = player.GetRedEnergy();
-        int blue = player.GetBlueEnergy();
-        int black = player.GetBlackEnergy();
-
-        if(red <= 0)
-        {
-            DestoryBarrier();
-            player.SetRed();
-        }
-        if (blue <= 0)
-        {
-            DestoryBarrier();
-            player.SetBlue();
-        }
-        if (black <= 0)
-        {
-            DestoryBarrier();
-            player.SetBlack();
-        }
+        //プレイヤー追従
+        this.transform.position = player.transform.position;
+        this.transform.position += new Vector3(2.0f, 0.0f, 0.0f);
     }
 
     /// <summary>
