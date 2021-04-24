@@ -40,7 +40,6 @@ public class BarrierController : MonoBehaviour
             color = Color.blue;
             BarrierCreate(color);
         }
-
     }
 
     /// <summary>
@@ -52,11 +51,13 @@ public class BarrierController : MonoBehaviour
         Vector3 pos = new Vector3(transform.position.x + interval, transform.position.y, 0.0f);
         // ゲームオブジェクトの生成
         GameObject obj = Instantiate(prefabObj, pos, Quaternion.identity);
+        obj.transform.localScale = new Vector3(0.6f, localMinScale, 1.0f);
         //色設定
         var renderer = obj.GetComponent<Renderer>();
         renderer.material.color = color;
-
         //間隔の調整
         interval += 1.0f;
+        //大きさの調整
+        localMinScale += 1.0f;
     }
 }
