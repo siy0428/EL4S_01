@@ -58,16 +58,21 @@ public class BarrierController : MonoBehaviour
             return;
         }
 
+        GameObject red = GameObject.Find("BlueGauge");
+
         //キー入力
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q)&& red.GetComponent<GaugeController>().GetisRed())
         {
+            
             BarrierCreate(prefabRed);
             RedOn = true;
+            red.GetComponent<GaugeController>().SetisUseRed(true);
         }
-        else if (Input.GetKey(KeyCode.W))
+        else if (Input.GetKey(KeyCode.W) && red.GetComponent<GaugeController>().GetisBlue())
         {
             BarrierCreate(prefabBlue);
             BlueOn = true;
+            red.GetComponent<GaugeController>().SetisUseBlue(true);
         }
     }
 
@@ -87,7 +92,7 @@ public class BarrierController : MonoBehaviour
     void BarrierCreate(GameObject prefab)
     {
         //バリア生成位置
-        Vector3 pos = new Vector3(transform.position.x + 2.0f, transform.position.y, 0.0f);
+        Vector3 pos = new Vector3(transform.position.x + 2.0f, transform.position.y+2.0f, 0.0f);
         // ゲームオブジェクトの生成
         GameObject obj = Instantiate(prefab, pos, Quaternion.identity);
         obj.transform.localScale = new Vector3(0.5f, 2.0f, 1.0f);

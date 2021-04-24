@@ -14,22 +14,25 @@ public class BarrierCollision : MonoBehaviour
     void Update()
     {
         BarrierController player = FindObjectOfType<BarrierController>();
+        GameObject red = GameObject.Find("BlueGauge");
 
         //ó£ÇµÇΩéû
         if (Input.GetKeyUp(KeyCode.Q))
         {
             DestoryBarrier();
             player.SetBarrierRed(false);
+            red.GetComponent<GaugeController>().SetisUseRed(false);
         }
         if (Input.GetKeyUp(KeyCode.W))
         {
             DestoryBarrier();
             player.SetBarrierBlue(false);
+            red.GetComponent<GaugeController>().SetisUseBlue(false);
         }
 
         //ÉvÉåÉCÉÑÅ[í«è]
         this.transform.position = player.transform.position;
-        this.transform.position += new Vector3(2.0f, 0.0f, 0.0f);
+        this.transform.position += new Vector3(2.0f, 2.0f, 0.0f);
     }
 
     /// <summary>
