@@ -18,33 +18,46 @@ public class BarrierCollision : MonoBehaviour
         //離した時
         if (Input.GetKeyUp(KeyCode.Q))
         {
-            Destroy(this.gameObject);  //バリアが消える
-            //パラメータリセット
-            player._Reset();
-
-            //バリア個数減少
-            player.BarrierCountDown();
+            DestoryBarrier();
+            player.SetRed();
         }
         if (Input.GetKeyUp(KeyCode.W))
         {
-            Destroy(this.gameObject);  //バリアが消える
-            //パラメータリセット
-            player._Reset();
-
-            //バリア個数減少
-            player.BarrierCountDown();
+            DestoryBarrier();
+            player.SetBlue();
         }
         if (Input.GetKeyUp(KeyCode.E))
         {
-            Destroy(this.gameObject);  //バリアが消える
-            //パラメータリセット
-            player._Reset();
+            DestoryBarrier();
+            player.SetBlack();
+        }
 
-            //バリア個数減少
-            player.BarrierCountDown();
+        //エネルギーが0になった時     
+        int red = player.GetRedEnergy();
+        int blue = player.GetBlueEnergy();
+        int black = player.GetBlackEnergy();
+
+        if(red <= 0)
+        {
+            DestoryBarrier();
+            player.SetRed();
+        }
+        if (blue <= 0)
+        {
+            DestoryBarrier();
+            player.SetBlue();
+        }
+        if (black <= 0)
+        {
+            DestoryBarrier();
+            player.SetBlack();
         }
     }
 
+    /// <summary>
+    /// 当たり判定
+    /// </summary>
+    /// <param name="other">当たったオブジェクト</param>
     void OnTriggerEnter(Collider other)
     {
         BarrierController player = FindObjectOfType<BarrierController>();
@@ -57,8 +70,18 @@ public class BarrierCollision : MonoBehaviour
             Destroy(other.gameObject);   //弾が消える
         }
 
-        //パラメータリセット
-        player._Reset();
+        //バリア個数減少
+        player.BarrierCountDown();
+    }
+
+    /// <summary>
+    /// バリア削除処理
+    /// </summary>
+    void DestoryBarrier()
+    {
+        BarrierController player = FindObjectOfType<BarrierController>();
+
+        Destroy(this.gameObject);  //バリアが消える
 
         //バリア個数減少
         player.BarrierCountDown();

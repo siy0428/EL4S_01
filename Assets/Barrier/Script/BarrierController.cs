@@ -13,44 +13,96 @@ public class BarrierController : MonoBehaviour
     private GameObject prefabBlue;
     [SerializeField]
     private GameObject prefabBlack;
-    [SerializeField, Range(1.0f, 16.0f)]
-    private float interval;
     [SerializeField]
-    private float localMinScale;
+    private int MaxEnergy;
     [SerializeField]
     private float MaxBarrierCount;
+
+    [SerializeField]
+    private float DecreaseEnergy;
 
     /// <summary>
     /// スクリプト用変数
     /// </summary>
     private int BarrierCount;
+    private int RedEnergy;
+    private int BlueEnergy;
+    private int BlackEnergy;
+    private bool RedOn;
+    private bool BlueOn;
+    private bool BlackOn;
 
     /// <summary>
     /// 外部スクリプト用メソッド
     /// </summary>
     public void BarrierCountUp() { BarrierCount++; }
     public void BarrierCountDown() { BarrierCount--; }
-    public void _Reset()
-    {
-        //間隔の調整
-        interval -= 1.0f;
-        //大きさの調整
-        localMinScale -= 1.0f;
-    }
+    public int GetRedEnergy() { return RedEnergy; }
+    public int GetBlueEnergy() { return BlueEnergy; }
+    public int GetBlackEnergy() { return BlackEnergy; }
+
+    public void SetRed() { RedOn = false; }
+    public void SetBlue() { BlueOn = false; }
+    public void SetBlack() { BlackOn = false; }
 
     // Start is called before the first frame update
     void Start()
     {
         BarrierCount = 0;
+        RedOn = false;
+        BlueOn = false;
+        BlackOn = false;
+
+        RedEnergy = MaxEnergy;
+        BlueEnergy = MaxEnergy;
+        BlackEnergy = MaxEnergy;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Blue:" + BlueEnergy);
+
         //キー入力でバリア生成
         InputBarrierCreate();
 
-        Debug.Log(BarrierCount);
+        //バリア生成中は
+        if (RedOn && RedEnergy > 0)
+        {
+            RedEnergy--;
+        }
+        else
+        {
+            RedEnergy++;
+            if (MaxEnergy < RedEnergy)
+            {
+                RedEnergy = MaxEnergy;
+            }
+        }
+        if (BlueOn && BlueEnergy > 0)
+        {
+            BlueEnergy--;
+        }
+        else
+        {
+            BlueEnergy++;
+            if (MaxEnergy < BlueEnergy)
+            {
+                BlueEnergy = MaxEnergy;
+            }
+        }
+        if (BlackOn && BlackEnergy > 0)
+        {
+            BlackEnergy--;
+        }
+        else
+        {
+            BlackEnergy++;
+            if (MaxEnergy < BlackEnergy)
+            {
+                BlackEnergy = MaxEnergy;
+            }
+        }
     }
 
     /// <summary>
@@ -64,30 +116,31 @@ public class BarrierController : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyCode.Q))
+        //キー入力
+        if (Input.GetKey(KeyCode.Q) && RedEnergy > 100)
         {
             BarrierCreate(prefabRed);
+            RedOn = true;
         }
-        if (Input.GetKey(KeyCode.W))
+        else if (Input.GetKey(KeyCode.W) && BlueEnergy > 100)
         {
             BarrierCreate(prefabBlue);
+            BlueOn = true;
         }
-        if (Input.GetKey(KeyCode.E))
+        else if (Input.GetKey(KeyCode.E) && BlackEnergy > 100)
         {
             BarrierCreate(prefabBlack);
+            BlackOn = true;
         }
-
     }
 
+    /// <summary>
+    /// バリアの削除
+    /// </summary>
+    /// <param name="prefab"></param>
     void BarrierDestroy(GameObject prefab)
     {
-        if(prefab == null)
-        {
-            return;
-        }
-
         Destroy(prefab);
-        _Reset();
         BarrierCountDown();
     }
 
@@ -97,14 +150,10 @@ public class BarrierController : MonoBehaviour
     void BarrierCreate(GameObject prefab)
     {
         //バリア生成位置
-        Vector3 pos = new Vector3(transform.position.x + interval + 0.5f, transform.position.y, 0.0f);
+        Vector3 pos = new Vector3(transform.position.x + 0.5f, transform.position.y, 0.0f);
         // ゲームオブジェクトの生成
         GameObject obj = Instantiate(prefab, pos, Quaternion.identity);
-        obj.transform.localScale = new Vector3(0.6f, localMinScale, 1.0f);
-        //間隔の調整
-        interval += 1.0f;
-        //大きさの調整
-        localMinScale += 1.0f;
+        obj.transform.localScale = new Vector3(0.6f, 1.0f, 1.0f);
 
         BarrierCount++;
     }
