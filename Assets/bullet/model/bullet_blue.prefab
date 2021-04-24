@@ -13,7 +13,11 @@ GameObject:
   - component: {fileID: 2624782117370422407}
   - component: {fileID: 4758144085333578192}
   - component: {fileID: 5616109041891192588}
+<<<<<<< HEAD
   - component: {fileID: 5645552667419864149}
+=======
+  - component: {fileID: 1323005471644536787}
+>>>>>>> a4c15e5734ac1419e17a11c84fdd0a945d78995c
   m_Layer: 0
   m_Name: bullet_blue
   m_TagString: blue
@@ -110,7 +114,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.05
+<<<<<<< HEAD
 --- !u!54 &5645552667419864149
+=======
+--- !u!54 &1323005471644536787
+>>>>>>> a4c15e5734ac1419e17a11c84fdd0a945d78995c
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,5 +132,9 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
+<<<<<<< HEAD
   m_Constraints: 0
+=======
+  m_Constraints: 124
+>>>>>>> a4c15e5734ac1419e17a11c84fdd0a945d78995c
   m_CollisionDetection: 0

@@ -17,14 +17,17 @@ public class resporn_bullet : MonoBehaviour
     [SerializeField]
     private GameObject black;      //黒色の弾
 
+    GameObject level;               //難易度オブジェクト
+
     int resporntime;               //弾の発射時間
     int time;                      //現在のタイマー
 
     // Start is called before the first frame update
     void Start()
     {
-        resporntime = 120;
+        Resporntimer();
         time = 0;
+        
     }
 
     // Update is called once per frame
@@ -32,9 +35,13 @@ public class resporn_bullet : MonoBehaviour
     {
         time++;
 
-        if(resporntime<=time)
+        if (resporntime <= time)
         {
             RandomBullet();
+            Resporntimer();
+
+            level = GameObject.Find("degree of difficulty");
+            level.GetComponent<level>().LevelUp();
         }
     }
 
@@ -42,7 +49,7 @@ public class resporn_bullet : MonoBehaviour
     {
         int rand = Random.Range(0, 3);
 
-        switch(rand)
+        switch (rand)
         {
             case 0:
                 SetRedBullet();
@@ -56,20 +63,28 @@ public class resporn_bullet : MonoBehaviour
         }
     }
 
-    public void SetRedBullet()  //赤の弾を選ぶ
+    void SetRedBullet()  //赤の弾を選ぶ
     {
         Instantiate(red, transform.position, Quaternion.identity);
         time = 0;
     }
 
-    public void SetBlueBullet() //青の弾を選ぶ
+    void SetBlueBullet() //青の弾を選ぶ
     {
         Instantiate(blue, transform.position, Quaternion.identity);
         time = 0;
     }
-    public void SetBlackBullet() //黒の弾を選ぶ
+    void SetBlackBullet() //黒の弾を選ぶ
     {
         Instantiate(black, transform.position, Quaternion.identity);
-        time =0;
+        time = 0;
+    }
+
+    void Resporntimer()
+    {
+        resporntime = 50;
+        level = GameObject.Find("degree of difficulty");
+        resporntime += Random.Range(0,240 - level.GetComponent<level>().GetLevel()*2);
+        resporntime += Random.Range(0, 100 - level.GetComponent<level>().GetLevel()*2);
     }
 }
