@@ -8,55 +8,153 @@ public class BarrierController : MonoBehaviour
     /// エディタ上から編集可能な変数
     /// </summary>
     [SerializeField]
-    private GameObject prefabObj;
-    [SerializeField, Range(1.0f, 16.0f)]
-    private float interval;
+    private GameObject prefabRed;
     [SerializeField]
-    private float localMinScale;
+    private GameObject prefabBlue;
+    [SerializeField]
+    private GameObject prefabBlack;
+    [SerializeField]
+    private int MaxEnergy;
+    [SerializeField]
+    private float MaxBarrierCount;
+
+    [SerializeField]
+    private float DecreaseEnergy;
 
     /// <summary>
     /// スクリプト用変数
     /// </summary>
+    private int BarrierCount;
+    private int RedEnergy;
+    private int BlueEnergy;
+    private int BlackEnergy;
+    private bool RedOn;
+    private bool BlueOn;
+    private bool BlackOn;
+
+    /// <summary>
+    /// 外部スクリプト用メソッド
+    /// </summary>
+    public void BarrierCountUp() { BarrierCount++; }
+    public void BarrierCountDown() { BarrierCount--; }
+    public int GetRedEnergy() { return RedEnergy; }
+    public int GetBlueEnergy() { return BlueEnergy; }
+    public int GetBlackEnergy() { return BlackEnergy; }
+
+    public void SetRed() { RedOn = false; }
+    public void SetBlue() { BlueOn = false; }
+    public void SetBlack() { BlackOn = false; }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        BarrierCount = 0;
+        RedOn = false;
+        BlueOn = false;
+        BlackOn = false;
+
+        RedEnergy = MaxEnergy;
+        BlueEnergy = MaxEnergy;
+        BlackEnergy = MaxEnergy;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Color color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        Debug.Log("Blue:" + BlueEnergy);
 
-        //キー入力のバリア生成
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            color = Color.red;
-            BarrierCreate(color);
-        }
-        else if (Input.GetKeyDown(KeyCode.W))
-        {
-            color = Color.blue;
-            BarrierCreate(color);
-        }
+        //キー入力でバリア生成
+        InputBarrierCreate();
 
+        //バリア生成中は
+        if (RedOn && RedEnergy > 0)
+        {
+            RedEnergy--;
+        }
+        else
+        {
+            RedEnergy++;
+            if (MaxEnergy < RedEnergy)
+            {
+                RedEnergy = MaxEnergy;
+            }
+        }
+        if (BlueOn && BlueEnergy > 0)
+        {
+            BlueEnergy--;
+        }
+        else
+        {
+            BlueEnergy++;
+            if (MaxEnergy < BlueEnergy)
+            {
+                BlueEnergy = MaxEnergy;
+            }
+        }
+        if (BlackOn && BlackEnergy > 0)
+        {
+            BlackEnergy--;
+        }
+        else
+        {
+            BlackEnergy++;
+            if (MaxEnergy < BlackEnergy)
+            {
+                BlackEnergy = MaxEnergy;
+            }
+        }
     }
 
     /// <summary>
-    /// キー入力のバリア生成
+    /// キー入力でバリア生成
     /// </summary>
-    void BarrierCreate(Color color)
+    void InputBarrierCreate()
+    {
+        //バリアが一定数以上だったら処理を行わない
+        if (BarrierCount >= MaxBarrierCount)
+        {
+            return;
+        }
+
+        //キー入力
+        if (Input.GetKey(KeyCode.Q) && RedEnergy > 100)
+        {
+            BarrierCreate(prefabRed);
+            RedOn = true;
+        }
+        else if (Input.GetKey(KeyCode.W) && BlueEnergy > 100)
+        {
+            BarrierCreate(prefabBlue);
+            BlueOn = true;
+        }
+        else if (Input.GetKey(KeyCode.E) && BlackEnergy > 100)
+        {
+            BarrierCreate(prefabBlack);
+            BlackOn = true;
+        }
+    }
+
+    /// <summary>
+    /// バリアの削除
+    /// </summary>
+    /// <param name="prefab"></param>
+    void BarrierDestroy(GameObject prefab)
+    {
+        Destroy(prefab);
+        BarrierCountDown();
+    }
+
+    /// <summary>
+    /// バリア生成
+    /// </summary>
+    void BarrierCreate(GameObject prefab)
     {
         //バリア生成位置
-        Vector3 pos = new Vector3(transform.position.x + interval, transform.position.y, 0.0f);
+        Vector3 pos = new Vector3(transform.position.x + 0.5f, transform.position.y, 0.0f);
         // ゲームオブジェクトの生成
-        GameObject obj = Instantiate(prefabObj, pos, Quaternion.identity);
-        //色設定
-        var renderer = obj.GetComponent<Renderer>();
-        renderer.material.color = color;
+        GameObject obj = Instantiate(prefab, pos, Quaternion.identity);
+        obj.transform.localScale = new Vector3(0.6f, 1.0f, 1.0f);
 
-        //間隔の調整
-        interval += 1.0f;
+        BarrierCount++;
     }
 }
