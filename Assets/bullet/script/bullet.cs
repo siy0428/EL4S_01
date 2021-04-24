@@ -31,4 +31,12 @@ public class bullet : MonoBehaviour
 
         transform.position = Pos;
     }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if(collision.gameObject.tag == "delete")
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }

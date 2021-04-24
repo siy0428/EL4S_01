@@ -17,6 +17,8 @@ public class resporn_bullet : MonoBehaviour
     [SerializeField]
     private GameObject black;      //黒色の弾
 
+    GameObject level;               //難易度オブジェクト
+
     int resporntime;               //弾の発射時間
     int time;                      //現在のタイマー
 
@@ -25,7 +27,7 @@ public class resporn_bullet : MonoBehaviour
     {
         Resporntimer();
         time = 0;
-
+        
     }
 
     // Update is called once per frame
@@ -37,7 +39,8 @@ public class resporn_bullet : MonoBehaviour
         {
             RandomBullet();
             Resporntimer();
-            GameObject level = GameObject.Find("degree of difficulty");
+
+            level = GameObject.Find("degree of difficulty");
             level.GetComponent<level>().LevelUp();
         }
     }
@@ -80,7 +83,8 @@ public class resporn_bullet : MonoBehaviour
     void Resporntimer()
     {
         resporntime = 50;
-        resporntime += Random.Range(0,240);
-        resporntime += Random.Range(0, 100);
+        level = GameObject.Find("degree of difficulty");
+        resporntime += Random.Range(0,240 - level.GetComponent<level>().GetLevel()*2);
+        resporntime += Random.Range(0, 100 - level.GetComponent<level>().GetLevel()*2);
     }
 }
