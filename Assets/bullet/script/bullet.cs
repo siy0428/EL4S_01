@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
+    [SerializeField]
+    float speed;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Vector3 Pos;
+
+        Pos = transform.position;
+
+        Pos.x -= speed;
+
+        transform.position = Pos;
     }
 }
