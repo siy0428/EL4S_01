@@ -56,20 +56,25 @@ public class resporn_bullet : MonoBehaviour
         }
     }
 
-    public void SetRedBullet()  //Ô‚Ì’e‚ğ‘I‚Ô
+    void SetRedBullet()  //Ô‚Ì’e‚ğ‘I‚Ô
     {
         Instantiate(red, transform.position, Quaternion.identity);
         time = 0;
     }
 
-    public void SetBlueBullet() //Â‚Ì’e‚ğ‘I‚Ô
+    void SetBlueBullet() //Â‚Ì’e‚ğ‘I‚Ô
     {
         Instantiate(blue, transform.position, Quaternion.identity);
         time = 0;
     }
-    public void SetBlackBullet() //•‚Ì’e‚ğ‘I‚Ô
+    void SetBlackBullet() //•‚Ì’e‚ğ‘I‚Ô
     {
         Instantiate(black, transform.position, Quaternion.identity);
         time =0;
     }
+    public void LevelUp()
+    {
+
+    }
+
 }
