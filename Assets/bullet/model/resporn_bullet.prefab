@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2a1e2a83b450794b936365b489a3969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  red: {fileID: 3828163442087880262, guid: 75fba953534c6eb49a389af35690d3e2, type: 3}
-  blue: {fileID: 5953874085107499725, guid: 785b361dd8f5a8945b2a2069b348e0da, type: 3}
-  black: {fileID: 2411525354894374093, guid: 49bba39dc1865b64184c52d0aca8e101, type: 3}
+  red: {fileID: 8661102286208261248, guid: 75fba953534c6eb49a389af35690d3e2, type: 3}
+  blue: {fileID: 5719329287323382970, guid: 6de3fff9ce76ab042be09c6bdc3245cf, type: 3}
+  black: {fileID: 1134690344212907799, guid: 49bba39dc1865b64184c52d0aca8e101, type: 3}
 --- !u!1 &5050225658934247069
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5050225658934247058
 Transform:
   m_ObjectHideFlags: 0
