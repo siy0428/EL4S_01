@@ -12,12 +12,14 @@ public class BackGroundManager : MonoBehaviour
     [SerializeField]
     private int instance_cnt;
 
-    [SerializeField]
-    private float depth;
+
+    //private float depth;
+    private float scale;
 
     void Start()
     {
         cnt = 0;
+        scale = 0.0f;
     }
 
 
@@ -26,10 +28,13 @@ public class BackGroundManager : MonoBehaviour
         cnt++;
 
         // 一定時間たったら背景オブジェクトを生成
-        if(cnt >= instance_cnt)
+        if (cnt >= instance_cnt)
         {
-            Instantiate(obj, new Vector3(40.0f, Random.Range(-10.0f, 10.0f), depth), Quaternion.identity);
-            obj.transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
+            scale = Random.Range(2.0f, 10.0f);
+            //depth = Random.Range(10.0f, 30.0f);
+
+            Instantiate(obj, new Vector3(60.0f, Random.Range(-10.0f, 10.0f), Random.Range(10.0f, 30.0f)), Quaternion.identity);
+            obj.transform.localScale = new Vector3(scale, scale, scale);
             cnt = 0;
         }
 
