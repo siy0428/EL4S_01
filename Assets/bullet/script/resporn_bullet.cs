@@ -23,8 +23,9 @@ public class resporn_bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        resporntime = 120;
+        Resporntimer();
         time = 0;
+
     }
 
     // Update is called once per frame
@@ -32,9 +33,12 @@ public class resporn_bullet : MonoBehaviour
     {
         time++;
 
-        if(resporntime<=time)
+        if (resporntime <= time)
         {
             RandomBullet();
+            Resporntimer();
+            GameObject level = GameObject.Find("degree of difficulty");
+            level.GetComponent<level>().LevelUp();
         }
     }
 
@@ -42,7 +46,7 @@ public class resporn_bullet : MonoBehaviour
     {
         int rand = Random.Range(0, 3);
 
-        switch(rand)
+        switch (rand)
         {
             case 0:
                 SetRedBullet();
@@ -70,11 +74,13 @@ public class resporn_bullet : MonoBehaviour
     void SetBlackBullet() //çïÇÃíeÇëIÇ‘
     {
         Instantiate(black, transform.position, Quaternion.identity);
-        time =0;
+        time = 0;
     }
-    public void LevelUp()
+
+    void Resporntimer()
     {
-
+        resporntime = 50;
+        resporntime += Random.Range(0,240);
+        resporntime += Random.Range(0, 100);
     }
-
 }
