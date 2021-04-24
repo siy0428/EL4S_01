@@ -157,10 +157,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabRed: {fileID: 3028826313482008681, guid: 0cdba4a42bdf0bb47922551cf0fad09a, type: 3}
   prefabBlue: {fileID: 3814970422661194745, guid: 06686a489debe9a458fb2a5af728e7c7, type: 3}
-  prefabBlack: {fileID: 7511640469026146626, guid: 12008b92f5e706048ad93d58b49a049a, type: 3}
   MaxEnergy: 500
   MaxBarrierCount: 1
-  DecreaseEnergy: 0
 --- !u!65 &777917131
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -387,7 +385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5050225657902989646, guid: c7385ece53840f94083520b59fd9d8f3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5050225658934247069, guid: c7385ece53840f94083520b59fd9d8f3, type: 3}
       propertyPath: m_IsActive
