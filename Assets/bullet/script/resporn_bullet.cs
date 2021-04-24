@@ -47,7 +47,7 @@ public class resporn_bullet : MonoBehaviour
 
     void RandomBullet() //ƒ‰ƒ“ƒ_ƒ€‚Ì’e‚ð‘I‚Ô
     {
-        int rand = Random.Range(0, 3);
+        int rand = Random.Range(0, 2);
 
         switch (rand)
         {

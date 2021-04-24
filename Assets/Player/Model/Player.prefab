@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 323834654688934789}
   - component: {fileID: 1940799923992625145}
   - component: {fileID: 4023164755849843199}
+  - component: {fileID: 8325389385811248756}
   - component: {fileID: 291489712767236674}
   m_Layer: 0
   m_Name: Player
@@ -120,6 +121,24 @@ MonoBehaviour:
   EnergyRecoverySpeed: 1
   MaxEnergy: 100
   grv: -9.81
+--- !u!114 &8325389385811248756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4818770907826648751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c045ddb637f643459a4179f0d969de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabRed: {fileID: 3028826313482008681, guid: 0cdba4a42bdf0bb47922551cf0fad09a, type: 3}
+  prefabBlue: {fileID: 3814970422661194745, guid: 06686a489debe9a458fb2a5af728e7c7, type: 3}
+  prefabBlack: {fileID: 7511640469026146626, guid: 12008b92f5e706048ad93d58b49a049a, type: 3}
+  MaxEnergy: 500
+  MaxBarrierCount: 0
+  DecreaseEnergy: 0
 --- !u!54 &291489712767236674
 Rigidbody:
   m_ObjectHideFlags: 0
